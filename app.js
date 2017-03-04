@@ -12,7 +12,7 @@ const yargs = require('yargs');
 const notes = require('./notes.js');
 
 const argv = yargs.argv
-var command = argv._[0]; /* returns an array containing the command line arguments */
+const command = argv._[0]; /* returns an array containing the command line arguments */
 console.log(`Command: ${command}`);
 console.log('Yargs:', argv)
 
