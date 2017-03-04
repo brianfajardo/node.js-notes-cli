@@ -9,15 +9,21 @@ const addNote = (title, body) => {
         body
     };
 
+    // Fetching for the notes if it exists already
     try {
         let notesString = fs.readFileSync('notes-data.json');
         notes = JSON.parse(notesString);
-    } catch (e) {
+    } catch (e) { };
 
-    }
+    // Filters out an array with duplicates, with `true` as flag
+    // If same title exist, do not overwrite the existing key pair (--body)
+    let duplicateNotes = notes.filter((note) => note.title === title);
 
-    notes.push(note);
-    fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+    // If is not a duplicate, update notes-data.json
+    if (duplicateNotes.length === 0) {
+        notes.push(note);
+        fs.writeFileSync('notes-data.json', JSON.stringify(notes));
+    };
 };
 
 const getAll = () => {
