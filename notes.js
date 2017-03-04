@@ -17,13 +17,15 @@ const addNote = (title, body) => {
 
     // Filters out an array with duplicates, with `true` as flag
     // If same title exist, do not overwrite the existing key pair (--body)
-    let duplicateNotes = notes.filter((note) => note.title === title);
+    let duplicateNotes = notes.find((note) => note.title === title);
 
     // If is not a duplicate, update notes-data.json
-    if (duplicateNotes.length === 0) {
+    if (duplicateNotes === undefined) {
         notes.push(note);
         fs.writeFileSync('notes-data.json', JSON.stringify(notes));
-    };
+    } else {
+        console.log(`There is already an existing note with title ${title}`)
+    }
 };
 
 const getAll = () => {
